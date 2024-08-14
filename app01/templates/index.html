@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #chat-container {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #chat-container .message {
+            margin: 10px 0;
+        }
+
+        #chat-container .message .user {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        #chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #send-button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container"></div>
+    <div id="chat-input">
+        <input type="text" id="message-input" placeholder="Type your message here..." autofocus>
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        // 替换 'ws://your-websocket-server-url' 用你实际的websocketurl
+        const socket = new WebSocket('ws://localhost:8000/room/123/');
+
+        // 链接成功自动触发
+        socket.onopen = function() {
+            console.log('WebSocket connection opened');
+        };
+
+        // 当websocket接受到服务器的消息后自动触发
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            addMessage(data.user, data.message);
+        };
+
+        socket.onclose = function() {
+            console.log('WebSocket connection closed');
+        };
+
+        socket.onerror = function(error) {
+            console.error('WebSocket error:', error);
+        };
+
+        // Function to add a message to the chat
+        function addMessage(user, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.innerHTML = `<span class="user">${user}:</span> ${message}`;
+            chatContainer.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
+        }
+
+        // Handle send button click
+        sendButton.addEventListener('click', () => {
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                const data = { user: 'You', message: message };
+                addMessage(data.user, data.message);
+                socket.send(JSON.stringify(data)); // Send message through WebSocket
+                messageInput.value = ''; // Clear the input field
+            }
+        });
+
+        // Handle Enter key press
+        messageInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+# 字节编译/优化/DLL文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C扩展文件
+*.so
+
+# 分发/打包
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+.installed.cfg
+*.egg
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django相关文件
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask/Django相关文件
+instance/
+.webassets-cache
+
+# Scrapy相关文件
+.scrapy
+
+# Sphinx文档
+docs/_build/
+target/
+
+# PyInstaller相关文件
+# 通常这些文件由Python脚本根据模板写入
+# 在PyInstaller构建可执行文件之前，用于注入日期/其他信息。
+*.manifest
+*.spec
+
+# 安装器日志文件
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 单元测试/覆盖率报告
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# 翻译文件
+*.mo
+*.pot
+
+# Jupyter Notebook相关文件
+.ipynb_checkpoints
+
+# IPython相关文件
+profile_default/
+ipython_config.py
+
+# pyenv相关文件
+.python-version
+
+# mypy相关文件
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# PyCharm相关文件
+.idea/
+
+# VS Code相关文件
+.vscode/
+
+# 虚拟环境
+.env
+.env.*
+.venv
+.venv.*
+
+# Ansible相关文件
+.ansible/
+
+# 临时文件
+*.tmp
+*.temp
+*.swp
+*~
+*.bak
+*.orig
+*.swo
+
+# Django迁移文件
+migrations/
+*/migrations/
+
+# 静态文件
+staticfiles/
+static/
+media/
+
+# Celery beat调度文件
+celerybeat-schedule
+
+# Dotenv文件
+.env
+
+# 本地Heroku环境变量文件
+.env.heroku
+
+# Python字节码
+*.pyc
+
+# MacOS系统文件
+.DS_Store
+
+# Windows缩略图缓存文件
+Thumbs.db
+
+# IDE文件
+.idea/
+.vscode/
+
+# 数据库文件
+*.sqlite3
+
+
