@@ -107,7 +107,7 @@
             const message = messageInput.value.trim();
             if (message !== '') {
                 const data = { user: 'You', message: message };
-                addMessage(data.user, data.message);
+                {#addMessage(data.user, data.message);#}
                 socket.send(JSON.stringify(data)); // Send message through WebSocket
                 messageInput.value = ''; // Clear the input field
             }
